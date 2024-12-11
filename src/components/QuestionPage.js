@@ -7,14 +7,31 @@ function QuestionPage({ categories, answers, handleAnswer, markCategoryComplete 
   const { category } = useParams();
   const navigate = useNavigate();
 
-  const currentQuestions = questions[category] || [];
+  const categoryData = questions[category];
+  const currentQuestions = categoryData?.items || [];
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  const [quizStarted, setQuizStarted] = useState(false);
   const [isCompleted, setIsCompleted] = useState(false);
+  const [feedback, setFeedback] = useState(null);
+  const [answered, setAnswered] = useState(false);
 
-  const handleNext = (answer) => {
+  const handleStartQuiz = () => {
+    setQuizStarted(true);
+  };
+
+  const handleAnswerClick = (answer) => {
     handleAnswer(category, currentQuestions[currentQuestionIndex].id, answer);
+    setFeedback(
+      currentQuestions[currentQuestionIndex].feedback[answer.toLowerCase()] || ''
+    );
+    setAnswered(true);
+  };
+
+  const handleNext = () => {
     if (currentQuestionIndex < currentQuestions.length - 1) {
       setCurrentQuestionIndex((prev) => prev + 1);
+      setFeedback(null);
+      setAnswered(false);
     } else {
       markCategoryComplete(category);
       setIsCompleted(true);
@@ -23,13 +40,24 @@ function QuestionPage({ categories, answers, handleAnswer, markCategoryComplete 
 
   const handleLeaveChecklist = () => {
     // Clear recorded answers for the current category
-    handleAnswer(category, null, null); // Assuming `handleAnswer` is designed to remove entries when `null` is passed
+    handleAnswer(category, null, null); // Assuming `handleAnswer` removes entries when `null` is passed
     navigate('/categories'); // Navigate back to CategorySelection
   };
 
   const handleReturnToCategories = () => {
     navigate('/categories');
   };
+
+  if (!quizStarted) {
+    return (
+      <div>
+        <h2>{category}</h2>
+        <p>{categoryData?.questionsPageIntroduction}</p>
+        <button onClick={handleStartQuiz}>Start Quiz</button>
+        <button onClick={handleLeaveChecklist}>Leave Checklist</button>
+      </div>
+    );
+  }
 
   if (currentQuestions.length === 0) {
     return <p>No questions available for this category.</p>;
@@ -47,8 +75,17 @@ function QuestionPage({ categories, answers, handleAnswer, markCategoryComplete 
       {!isCompleted ? (
         <div>
           <p>{currentQuestions[currentQuestionIndex].text}</p>
-          <button onClick={() => handleNext('Yes')}>Yes</button>
-          <button onClick={() => handleNext('No')}>No</button>
+          {feedback && <p><strong>Feedback:</strong> {feedback}</p>}
+          <div>
+            {!answered ? (
+              <>
+                <button onClick={() => handleAnswerClick('Yes')}>Yes</button>
+                <button onClick={() => handleAnswerClick('No')}>No</button>
+              </>
+            ) : (
+              <button onClick={handleNext}>Next</button>
+            )}
+          </div>
           <button onClick={handleLeaveChecklist}>Leave Checklist</button>
         </div>
       ) : (

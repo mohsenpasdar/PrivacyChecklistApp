@@ -1,8 +1,16 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './CategorySelection.css'; // Assuming the styles are saved in this file
 
 function CategorySelection({ categories, completedCategories }) {
+  const navigate = useNavigate();
+
+  const handleRestart = () => {
+    // Navigate to the homepage and reload the app to reset state
+    navigate('/');
+    window.location.reload();
+  };
+
   return (
     <div>
       <h2>Select a Category</h2>
@@ -19,13 +27,14 @@ function CategorySelection({ categories, completedCategories }) {
           </Link>
         </button>
       ))}
-      {completedCategories.length > 0 && (
-        <div>
-          <Link to="/results">
+      <div style={{ marginTop: '20px' }}>
+        {completedCategories.length > 0 && (
+          <Link to="/results" style={{ marginRight: '10px' }}>
             <button>View Results</button>
           </Link>
-        </div>
-      )}
+        )}
+        <button onClick={handleRestart}>Restart Quiz</button>
+      </div>
     </div>
   );
 }
