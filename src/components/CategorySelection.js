@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './CategorySelection.css';
+import './CategorySelection.css'; // Assuming the styles are saved in this file
 
-function CategorySelection({ categories, completedCategories, allCategoriesCompleted }) {
+function CategorySelection({ categories, completedCategories }) {
   return (
     <div>
       <h2>Select a Category</h2>
@@ -19,7 +19,7 @@ function CategorySelection({ categories, completedCategories, allCategoriesCompl
           </Link>
         </button>
       ))}
-      {allCategoriesCompleted && (
+      {completedCategories.length > 0 && (
         <div>
           <Link to="/results">
             <button>View Results</button>
