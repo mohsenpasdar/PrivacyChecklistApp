@@ -25,8 +25,8 @@ function ResultsPage({ answers, categories, completedCategories }) {
   };
 
   const getScoreFeedback = (score, category) => {
-    if (score <= 35) return questions[category]?.scoreFeedback.low;
-    if (score <= 75) return questions[category]?.scoreFeedback.medium;
+    if (score <= 41) return questions[category]?.scoreFeedback.low;
+    if (score <= 79) return questions[category]?.scoreFeedback.medium;
     return questions[category]?.scoreFeedback.high;
   };
 

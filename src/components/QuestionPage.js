@@ -17,6 +17,9 @@ function QuestionPage({ categories, answers, handleAnswer, markCategoryComplete 
 
   const handleStartQuiz = () => {
     setQuizStarted(true);
+    setCurrentQuestionIndex(0); // Reset question index in case of a restart
+    setFeedback(null);
+    setAnswered(false);
   };
 
   const handleAnswerClick = (answer) => {
@@ -42,6 +45,16 @@ function QuestionPage({ categories, answers, handleAnswer, markCategoryComplete 
     // Clear recorded answers for the current category
     handleAnswer(category, null, null); // Assuming `handleAnswer` removes entries when `null` is passed
     navigate('/categories'); // Navigate back to CategorySelection
+  };
+
+  const handleRestartChecklist = () => {
+    // Clear all recorded answers for the category and reset the quiz
+    handleAnswer(category, null, null);
+    setQuizStarted(false); // Return to the introduction screen
+    setIsCompleted(false);
+    setCurrentQuestionIndex(0); // Reset question index
+    setFeedback(null);
+    setAnswered(false);
   };
 
   const handleReturnToCategories = () => {
@@ -86,6 +99,7 @@ function QuestionPage({ categories, answers, handleAnswer, markCategoryComplete 
               <button onClick={handleNext}>Next</button>
             )}
           </div>
+          <button onClick={handleRestartChecklist}>Restart Checklist</button>
           <button onClick={handleLeaveChecklist}>Leave Checklist</button>
         </div>
       ) : (
