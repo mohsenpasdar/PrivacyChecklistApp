@@ -1,39 +1,59 @@
-import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import './CategorySelection.css'; // Assuming the styles are saved in this file
+import React from "react";
+import { Link, useNavigate } from "react-router-dom";
+import "./CategorySelection.css";
 
-function CategorySelection({ categories, completedCategories }) {
+function CategorySelection({
+  categories,
+  completedCategories,
+  allCategoriesCompleted,
+}) {
   const navigate = useNavigate();
 
   const handleRestart = () => {
     // Navigate to the homepage and reload the app to reset state
-    navigate('/');
+    navigate("/");
     window.location.reload();
   };
 
   return (
-    <div>
-      <h2>Select a Category</h2>
-      {categories.map((category) => (
-        <button
-          key={category}
-          disabled={completedCategories.includes(category)}
-        >
-          <Link
-            to={`/questions/${category}`}
-            style={{ pointerEvents: completedCategories.includes(category) ? 'none' : 'auto' }}
-          >
-            {category}
-          </Link>
-        </button>
-      ))}
-      <div style={{ marginTop: '20px' }}>
+    <div className="category-selection">
+      <h2 className="category-title">Select a Category</h2>
+      <div className="category-box">
+        <div className="category-grid">
+          {categories.map((category) => (
+            <button
+              key={category}
+              className="category-button"
+              disabled={completedCategories.includes(category)}
+            >
+              <Link
+                to={`/questions/${category}`}
+                style={{
+                  pointerEvents: completedCategories.includes(category)
+                    ? "none"
+                    : "auto",
+                }}
+              >
+                {category}
+              </Link>
+            </button>
+          ))}
+        </div>
+      </div>
+      <div className="bottom-buttons">
         {completedCategories.length > 0 && (
-          <Link to="/results" style={{ marginRight: '10px' }}>
-            <button>View Results</button>
+          <Link
+            to="/results"
+            className={allCategoriesCompleted ? "results-completed" : ""}
+          >
+            <button className="results-button">
+              {allCategoriesCompleted ? "View Final Results" : "View Results"}
+            </button>
           </Link>
         )}
-        <button onClick={handleRestart}>Restart Quiz</button>
+        <button className="restart-button" onClick={handleRestart}>
+          Restart Quiz
+        </button>
       </div>
     </div>
   );

@@ -1,25 +1,26 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import { questions } from '../data/questions';
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import { questions } from "../data/questions";
+import '../styles/ResultsPage.css'
 
 function ResultsPage({ answers, categories, completedCategories }) {
   const navigate = useNavigate();
 
   const handleRestart = () => {
     // Navigate to the homepage and reload
-    navigate('/');
+    navigate("/");
     window.location.reload();
   };
 
   const handleReturnToCategories = () => {
-    navigate('/categories');
+    navigate("/categories");
   };
 
   const calculateScore = (category) => {
     const categoryQuestions = questions[category]?.items || [];
     const totalQuestions = categoryQuestions.length;
     const answeredYes = Object.values(answers[category] || {}).filter(
-      (answer) => answer === 'Yes'
+      (answer) => answer === "Yes"
     ).length;
     return Math.round((answeredYes / totalQuestions) * 100);
   };
@@ -30,26 +31,27 @@ function ResultsPage({ answers, categories, completedCategories }) {
     return questions[category]?.scoreFeedback.high;
   };
 
-  const allCategoriesCompleted = completedCategories.length === categories.length;
+  const allCategoriesCompleted =
+    completedCategories.length === categories.length;
 
   return (
-    <div>
+    <div className="results-page">
       <h2>Results</h2>
       {completedCategories.map((category) => {
         const score = calculateScore(category);
         const feedback = getScoreFeedback(score, category);
         const recommendations = questions[category]?.items
-          .filter((item) => answers[category]?.[item.id] === 'No')
+          .filter((item) => answers[category]?.[item.id] === "No")
           .map((item) => item.recommendation);
 
         return (
-          <div key={category}>
+          <div key={category} className="results-category">
             <h3>{category}</h3>
             <p>{questions[category]?.resultsIntroduction}</p>
-            <p>Score: {score}%</p>
+            <p className="results-score">Score: {score}%</p>
             <p>{feedback}</p>
             {recommendations.length > 0 && (
-              <div>
+              <div className="recommendations">
                 <h4>Recommendations:</h4>
                 <ul>
                   {recommendations.map((rec, index) => (
@@ -62,15 +64,16 @@ function ResultsPage({ answers, categories, completedCategories }) {
         );
       })}
 
-      {!allCategoriesCompleted && (
-        <button onClick={handleReturnToCategories}>
-          Return to Categories
+      <div className="bottom-buttons">
+        {!allCategoriesCompleted && (
+          <button className="return-button" onClick={handleReturnToCategories}>
+            Return to Categories
+          </button>
+        )}
+        <button className="restart-button" onClick={handleRestart}>
+          Restart Quiz
         </button>
-      )}
-
-      <button onClick={handleRestart}>
-        Restart Quiz
-      </button>
+      </div>
     </div>
   );
 }

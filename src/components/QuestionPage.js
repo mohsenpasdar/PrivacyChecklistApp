@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import ProgressBar from './ProgressBar';
 import { questions } from '../data/questions';
+import '../styles/QuestionPage.css'; // Add styles here
 
 function QuestionPage({ categories, answers, handleAnswer, markCategoryComplete }) {
   const { category } = useParams();
@@ -42,15 +43,13 @@ function QuestionPage({ categories, answers, handleAnswer, markCategoryComplete 
   };
 
   const handleLeaveChecklist = () => {
-    // Clear recorded answers for the current category
-    handleAnswer(category, null, null); // Assuming `handleAnswer` removes entries when `null` is passed
+    handleAnswer(category, null, null); // Clear recorded answers
     navigate('/categories'); // Navigate back to CategorySelection
   };
 
   const handleRestartChecklist = () => {
-    // Clear all recorded answers for the category and reset the quiz
-    handleAnswer(category, null, null);
-    setQuizStarted(false); // Return to the introduction screen
+    handleAnswer(category, null, null); // Clear recorded answers
+    setQuizStarted(false);
     setIsCompleted(false);
     setCurrentQuestionIndex(0); // Reset question index
     setFeedback(null);
@@ -61,51 +60,67 @@ function QuestionPage({ categories, answers, handleAnswer, markCategoryComplete 
     navigate('/categories');
   };
 
-  if (!quizStarted) {
-    return (
-      <div>
-        <h2>{category}</h2>
-        <p>{categoryData?.questionsPageIntroduction}</p>
-        <button onClick={handleStartQuiz}>Start Quiz</button>
-        <button onClick={handleLeaveChecklist}>Leave Checklist</button>
-      </div>
-    );
-  }
-
-  if (currentQuestions.length === 0) {
-    return <p>No questions available for this category.</p>;
-  }
-
   return (
-    <div>
-      <h2>{category}</h2>
-      {!isCompleted && (
-        <ProgressBar
-          currentQuestionIndex={currentQuestionIndex}
-          totalQuestions={currentQuestions.length}
-        />
-      )}
-      {!isCompleted ? (
-        <div>
-          <p>{currentQuestions[currentQuestionIndex].text}</p>
-          {feedback && <p><strong>Feedback:</strong> {feedback}</p>}
-          <div>
-            {!answered ? (
-              <>
-                <button onClick={() => handleAnswerClick('Yes')}>Yes</button>
-                <button onClick={() => handleAnswerClick('No')}>No</button>
-              </>
-            ) : (
-              <button onClick={handleNext}>Next</button>
-            )}
+    <div className="question-page">
+      {!quizStarted ? (
+        <div className="question-content">
+          <h2 className="question-title">{category}</h2>
+          <p className="question-introduction">{categoryData?.questionsPageIntroduction}</p>
+          <div className="bottom-buttons-questions">
+            <button className="start-quiz-button" onClick={handleStartQuiz}>
+              Start Checklist
+            </button>
+            <button className="leave-checklist-button" onClick={handleLeaveChecklist}>
+              Leave Checklist
+            </button>
           </div>
-          <button onClick={handleRestartChecklist}>Restart Checklist</button>
-          <button onClick={handleLeaveChecklist}>Leave Checklist</button>
         </div>
       ) : (
         <div>
-          <p>You have completed all questions for the {category} category!</p>
-          <button onClick={handleReturnToCategories}>Return to Categories</button>
+          <h2 className="question-title">{category}</h2>
+          {!isCompleted && (
+            <ProgressBar
+              currentQuestionIndex={currentQuestionIndex}
+              totalQuestions={currentQuestions.length}
+            />
+          )}
+          {!isCompleted ? (
+            <div>
+              <p className="question-text">{currentQuestions[currentQuestionIndex].text}</p>
+              {feedback && <p className="feedback-text"><strong>Feedback:</strong> {feedback}</p>}
+              <div>
+                {!answered ? (
+                  <>
+                    <button className="yes-button" onClick={() => handleAnswerClick('Yes')}>
+                      Yes
+                    </button>
+                    <button className="no-button" onClick={() => handleAnswerClick('No')}>
+                      No
+                    </button>
+                  </>
+                ) : (
+                  <button className="next-button" onClick={handleNext}>
+                    Next
+                  </button>
+                )}
+              </div>
+              <div className="bottom-buttons-questions">
+                <button className="restart-checklist-button" onClick={handleRestartChecklist}>
+                  Restart Checklist
+                </button>
+                <button className="leave-checklist-button" onClick={handleLeaveChecklist}>
+                  Leave Checklist
+                </button>
+              </div>
+            </div>
+          ) : (
+            <div>
+              <p>You have completed all questions for the {category} category!</p>
+              <button className="return-categories-button" onClick={handleReturnToCategories}>
+                Return to Categories
+              </button>
+            </div>
+          )}
         </div>
       )}
     </div>

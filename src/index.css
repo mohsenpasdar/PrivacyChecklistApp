@@ -18,7 +18,7 @@ body {
 /* Headings */
 h1, h2, h3, h4, h5, h6 {
   margin-bottom: 15px;
-  color: rgb(127, 123, 123); /* Blue for emphasis */
+  color: #2c3e50; /* Blue for emphasis */
 }
 
 h1 {
@@ -55,7 +55,7 @@ button {
   border: none;
   padding: 10px 20px;
   margin: 10px 5px;
-  font-size: 16px;
+  font-size: 20px;
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s ease, transform 0.2s ease;

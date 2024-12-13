@@ -1,0 +1,116 @@
+/* Container for the QuestionPage */
+.question-page {
+  position: relative;
+  max-width: 1400px;
+  height: 700px; /* Set a consistent minimum height */
+  margin: 40px auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  text-align: center;
+  font-family: Arial, sans-serif;
+  color: #333;
+  min-height: 600px; /* Set a consistent minimum height */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Ensure bottom buttons stay at the bottom */
+}
+
+/* Title for each category */
+.question-title {
+  font-size: 28px;
+  margin-bottom: 20px;
+  color: #333;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+}
+
+/* Introduction or question content */
+.question-content {
+    flex-grow: 1; /* Make dynamic content fill available space */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center content horizontally */
+    text-align: justify;
+    padding: 20px;
+    justify-content: flex-start; /* Align content to the top */
+  }
+
+/* Question text styling */
+.question-text {
+  font-size: 22px;
+  margin: 20px 0;
+}
+
+/* Feedback text styling */
+.feedback-text {
+  font-size: 20px;
+  color: #555;
+  margin-top: 15px;
+}
+
+/* Progress bar container */
+.progress-bar-container {
+  margin-bottom: 20px;
+}
+
+/* Answer buttons (Yes/No) */
+.yes-button,
+.no-button,
+.next-button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  font-size: 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  margin: 10px;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.yes-button:hover,
+.no-button:hover,
+.next-button:hover {
+  background-color: #0056b3;
+}
+
+/* Bottom buttons container */
+.bottom-buttons-questions {
+  position: absolute; /* Position buttons relative to .question-page */
+  bottom: 20px; /* Add spacing from the bottom of the container */
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  padding: 10px 0;
+}
+
+/* Restart and Leave Checklist button styles */
+.start-quiz-button {
+  background-color: #28a745; /* Green */
+  color: white;
+  font-size: 20px;
+}
+
+.leave-checklist-button {
+  background-color: #dc3545; /* Red */
+  color: white;
+  font-size: 20px;
+}
+
+.restart-checklist-button {
+  background-color: #ffc107; /* Yellow */
+  color: #333;
+  font-size: 20px;
+}
+
+.leave-checklist-button:hover {
+  background-color: #b52d3a;
+}
+
+.restart-checklist-button:hover {
+  background-color: #e0a800;
+}
