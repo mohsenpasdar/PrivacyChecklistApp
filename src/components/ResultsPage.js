@@ -37,6 +37,7 @@ function ResultsPage({ answers, categories, completedCategories }) {
   return (
     <div className="results-page">
       <h2>Results</h2>
+      <p className="results-category">Understanding your digital privacy practices is the first step toward building a safer online presence. Below, you’ll find insights into how well you’ve performed in these categories, including your score, tailored feedback, and actionable recommendations for improvement. Each section highlights areas where you’re excelling and where there’s room for growth, empowering you to take meaningful steps to protect your personal information and contribute to a more secure digital environment.</p>
       {completedCategories.map((category) => {
         const score = calculateScore(category);
         const feedback = getScoreFeedback(score, category);

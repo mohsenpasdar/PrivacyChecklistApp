@@ -28,7 +28,8 @@ const questions = {
           yes: "Good job! Avoiding reused passwords reduces vulnerability to breaches.",
           no: "Reusing passwords increases the risk of multiple accounts being compromised.",
         },
-        recommendation: "Avoid reusing passwords to enhance your account security.",
+        recommendation:
+          "Avoid reusing passwords to enhance your account security.",
       },
       {
         id: 3,
@@ -310,6 +311,70 @@ const questions = {
         },
         recommendation:
           "Review and update privacy settings on your devices regularly.",
+      },
+    ],
+  },
+  "Online Shopping & Payment Security": {
+    questionsPageIntroduction:
+      "Shopping online and making digital payments are convenient, but they also come with risks. In this category, you'll evaluate your practices to ensure secure transactions and protect your financial information. Choose 'Yes' or 'No' for each question to receive quick feedback. If you decide to leave the quiz at any point, your answers for this category will not be saved. Once all questions are answered, you can return to the category selection to either continue with other categories or see your partial results.",
+    resultsIntroduction:
+      "Online shopping and digital payments can expose you to potential risks like fraud and identity theft. By following best practices, you can safeguard your transactions and enjoy a secure shopping experience.",
+    scoreFeedback: {
+      high: "Excellent! Your online shopping and payment security practices are strong. Keep up the great work to stay protected.",
+      medium:
+        "Good effort! You’re on the right track, but there’s room to improve your transaction security.",
+      low: "Your online shopping and payment security practices need improvement. Consider implementing the recommended steps to protect your financial information.",
+    },
+    items: [
+      {
+        id: 1,
+        text: "Do you verify the legitimacy of websites before making purchases?",
+        feedback: {
+          yes: "Great! Verifying websites helps ensure you’re shopping on trusted platforms.",
+          no: "Skipping verification can expose you to fraudulent websites.",
+        },
+        recommendation:
+          "Always verify the legitimacy of websites before making purchases.",
+      },
+      {
+        id: 2,
+        text: "Do you use secure payment methods, such as virtual cards or payment apps, instead of directly entering your card details?",
+        feedback: {
+          yes: "Good job! Secure payment methods add an extra layer of protection.",
+          no: "Using less secure payment methods increases the risk of data theft.",
+        },
+        recommendation:
+          "Use secure payment methods, like virtual cards or payment apps, to safeguard your transactions.",
+      },
+      {
+        id: 3,
+        text: "Do you avoid saving payment information on e-commerce platforms?",
+        feedback: {
+          yes: "Nice! Avoiding stored payment details reduces exposure in case of a breach.",
+          no: "Saving payment details increases the risk of misuse if the platform is breached.",
+        },
+        recommendation:
+          "Refrain from saving payment information on e-commerce platforms for enhanced security.",
+      },
+      {
+        id: 4,
+        text: "Do you check for HTTPS encryption on websites before entering sensitive information?",
+        feedback: {
+          yes: "Excellent! HTTPS encryption ensures your data is transmitted securely.",
+          no: "Using non-encrypted sites can expose your sensitive information to theft.",
+        },
+        recommendation:
+          "Always check for HTTPS encryption on websites before entering sensitive information.",
+      },
+      {
+        id: 5,
+        text: "Have you enabled transaction alerts to monitor your payment activity?",
+        feedback: {
+          yes: "Great! Transaction alerts help you quickly detect unauthorized activities.",
+          no: "Not using transaction alerts can delay your response to suspicious activities.",
+        },
+        recommendation:
+          "Enable transaction alerts to monitor your payment activity in real-time.",
       },
     ],
   },

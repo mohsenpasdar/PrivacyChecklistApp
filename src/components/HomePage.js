@@ -15,7 +15,7 @@ function HomePage() {
         key areas where privacy matters most.
       </p>
       <p className="homepage-categories">
-        You’ll evaluate your practices across five important categories:
+        You’ll evaluate your practices across six important categories:
         <ul>
           <li>
             <strong>Password Security:</strong> Learn about creating strong,
@@ -36,6 +36,10 @@ function HomePage() {
           <li>
             <strong>Surveillance Awareness:</strong> Recognize and minimize
             risks from modern surveillance technologies.
+          </li>
+          <li>
+            <strong>Online Shopping and Payment Security:</strong> Explore best practices 
+            for secure transactions and protecting your financial information while shopping online.
           </li>
         </ul>
       </p>
